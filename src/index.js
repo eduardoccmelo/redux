@@ -17,17 +17,29 @@ const { add } = require("lodash");
 // const updated = { ...person, name: "Bob" };
 // console.log(updated);
 
-const numbers = [1, 2, 3];
-console.log(numbers);
+// const numbers = [1, 2, 3];
+// console.log(numbers);
 
-//Adding
-const index = numbers.indexOf(2);
-const added = [...numbers.slice(0, index), 4, ...numbers.slice(index)];
-console.log(added);
+// //Adding
+// const index = numbers.indexOf(2);
+// const added = [...numbers.slice(0, index), 4, ...numbers.slice(index)];
+// console.log(added);
 
-//Removing
-const removed = numbers.filter((num) => num !== 2);
+// //Removing
+// const removed = numbers.filter((num) => num !== 2);
 
-//Updating
-const updated = numbers.map((num) => (num === 2 ? 20 : num));
-console.log(updated);
+// //Updating
+// const updated = numbers.map((num) => (num === 2 ? 20 : num));
+// console.log(updated);
+
+import { Map } from "immutable";
+
+let book = Map({ title: "Harry Potter" });
+
+function publish(book) {
+  return book.set("isPublished", true);
+}
+
+book = publish(book);
+
+console.log(book.toJS());
