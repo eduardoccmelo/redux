@@ -1,6 +1,6 @@
 // import { compose, pipe } from "lodash/fp";
 
-const { add } = require("lodash");
+// const { add } = require("lodash");
 
 // let input = "   JavaScript   ";
 // let output = "<div>" + input.trim() + "</div>";
@@ -44,17 +44,40 @@ const { add } = require("lodash");
 
 // console.log(book.toJS());
 
-import { produce } from "immer";
+// import { produce } from "immer";
 
-let book = { title: "Harry Potter" };
+// let book = { title: "Harry Potter" };
 
-function publish(book) {
-  return produce(book, (draftBook) => {
-    draftBook.isPublished = true;
-  });
-}
+// function publish(book) {
+//   return produce(book, (draftBook) => {
+//     draftBook.isPublished = true;
+//   });
+// }
 
-let updated = publish(book);
+// let updated = publish(book);
 
-console.log(book);
-console.log(updated);
+// console.log(book);
+// console.log(updated);
+
+import store from "./store";
+
+import * as actions from "./actionTypes";
+import { bugAdded, bugResolved } from "./actions";
+
+const unsubscribe = store.subscribe(() => {
+  console.log("Store changed!", store.getState());
+});
+
+store.dispatch(bugAdded("Bug 1"));
+store.dispatch(bugResolved(1));
+
+unsubscribe();
+
+store.dispatch({
+  type: actions.BUG_REMOVED,
+  payload: {
+    id: 1,
+  },
+});
+
+console.log(store.getState());
